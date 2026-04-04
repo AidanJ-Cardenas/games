@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDIO // Portfolio</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #ffffff;
+            --secondary: #3b82f6;
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Mesh Background */
+        .mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(37, 99, 235, 0.1) 0px, transparent 50%);
+            filter: blur(100px);
+            animation: meshMove 20s infinite alternate;
+        }
+
+        @keyframes meshMove {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2) translate(5%, 5%); }
+        }
+
+        /* Interactive Spotlight */
+        #spotlight {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.05) 0%, transparent 40%);
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            margin-bottom: 100px;
+            text-align: center;
+        }
+
+        .logo-box {
+            display: inline-block;
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            font-family: monospace;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -3px;
+            line-height: 0.9;
+        }
+
+        .glitch-text {
+            color: var(--text);
+            position: relative;
+        }
+
+        /* Game Cards */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 2px; /* Sharp professional edges */
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .card:hover::before { transform: translateX(100%); }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .card-meta {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card h2 {
+            font-size: 2.5rem;
+            margin: 0 0 15px 0;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-play {
+            width: 50px; height: 50px;
+            border: 1px solid var(--text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .card:hover .btn-play {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 150px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding: 40px;
+            font-family: monospace;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 600px) {
+            .game-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh"></div>
+    <div id="spotlight"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo-box">Status: Operational</div>
+            <h1 class="glitch-text">VOID<br>WORKS</h1>
+        </header>
+
+        <main class="game-grid">
+            
+            <a href="dead-static.html" class="card">
+                <div class="card-meta">
+                    <span>BUILD_LOG: 2024.01</span>
+                    <span>ACTIVE_STABLE</span>
+                </div>
+                <h2>Dead<br>Static</h2>
+                <p>An intense top-down combat simulation utilizing advanced portal physics and resource-contingent survival loops.</p>
+                <div class="btn-play">▶</div>
+            </a>
+
+            <div class="card" style="opacity: 0.6; cursor: default;">
+                <div class="card-meta">
+                    <span>BUILD_LOG: NULL</span>
+                    <span>ENCRYPTED</span>
+                </div>
+                <h2>Project<br>Alpha</h2>
+                <p>Development in progress. High-fidelity systems integration currently underway.</p>
+                <div class="btn-play" style="opacity: 0.2;">✖</div>
+            </div>
+
+        </main>
+
+        <footer>
+            &copy; 2026 // ALL SYSTEMS NOMINAL
+        </footer>
+    </div>
+
+    <script>
+        // Spotlight following mouse
+        const spotlight = document.getElementById('spotlight');
+        window.addEventListener('mousemove', e => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            spotlight.style.setProperty('--x', x + '%');
+            spotlight.style.setProperty('--y', y + '%');
+        });
+    </script>
+</body>
+</html>
